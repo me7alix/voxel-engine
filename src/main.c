@@ -13,6 +13,8 @@
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
 
+//heh
+
 unsigned vao;
 unsigned int shader_program;
 
