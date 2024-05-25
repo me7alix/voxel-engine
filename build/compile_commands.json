@@ -1,0 +1,20 @@
+[
+{
+  "directory": "/mnt/9E4668B146688BB9/CProjects/voxel-engine/build",
+  "command": "/usr/bin/gcc   -g -o CMakeFiles/voxelengine.dir/src/main.c.o -c /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/main.c",
+  "file": "/mnt/9E4668B146688BB9/CProjects/voxel-engine/src/main.c",
+  "output": "CMakeFiles/voxelengine.dir/src/main.c.o"
+},
+{
+  "directory": "/mnt/9E4668B146688BB9/CProjects/voxel-engine/build",
+  "command": "/usr/bin/gcc   -g -o CMakeFiles/voxelengine.dir/src/Glad/glad.c.o -c /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/Glad/glad.c",
+  "file": "/mnt/9E4668B146688BB9/CProjects/voxel-engine/src/Glad/glad.c",
+  "output": "CMakeFiles/voxelengine.dir/src/Glad/glad.c.o"
+},
+{
+  "directory": "/mnt/9E4668B146688BB9/CProjects/voxel-engine/build",
+  "command": "/usr/bin/gcc   -g -o CMakeFiles/voxelengine.dir/src/Octree/octree.c.o -c /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/Octree/octree.c",
+  "file": "/mnt/9E4668B146688BB9/CProjects/voxel-engine/src/Octree/octree.c",
+  "output": "CMakeFiles/voxelengine.dir/src/Octree/octree.c.o"
+}
+]

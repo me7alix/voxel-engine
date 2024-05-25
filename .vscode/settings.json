@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "glfw3.h": "c",
+        "glad.h": "c",
+        "octree.h": "c",
+        "stdlib.h": "c",
+        "stdio.h": "c",
+        "stddef.h": "c"
+    }
+}
