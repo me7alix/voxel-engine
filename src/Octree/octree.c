@@ -54,7 +54,19 @@ int sphere_intersects_aabb(vec3 sphere_center, float sphere_radius, vec3 aabb_mi
     return distance_squared <= sphere_radius;
 }
 
-void destroyCells(OctreeArray *octarr, int rootInd, vec3 pos, vec3 sp, float sr, int depth)
+void collapseVoxel(OctreeArray *octarr, int rootInd){
+    Octree *root = &octarr->arr[rootInd];
+    for(int i = 0; i < 8; i++){
+        Octree child = octarr->arr[root->children[i]];
+        if(!child.isIntact || (
+            child.isIntact && child.isColored
+        )) return;
+    }
+    root->isIntact = 1;
+    root->isColored = 0;
+}
+
+void destroyVoxels(OctreeArray *octarr, int rootInd, vec3 pos, vec3 sp, float sr, int depth)
 {
     vec3 posM, size = {5.0 / powf(2.0, depth), 5.0 / powf(2.0, depth)};
     vec3_dup(posM, pos);
@@ -71,8 +83,9 @@ void destroyCells(OctreeArray *octarr, int rootInd, vec3 pos, vec3 sp, float sr,
             vec3 np = {0, 0, 0};
             vec3_scale(np, positions[i], size[0] / 2.0);
             vec3_add(np, np, pos);
-            destroyCells(octarr, root->children[i], np, sp, sr, depth + 1);
+            destroyVoxels(octarr, root->children[i], np, sp, sr, depth + 1);
         }
+        collapseVoxel(octarr, rootInd);
         return;
     }
     root->isIntact = 0;
@@ -84,6 +97,7 @@ void destroyCells(OctreeArray *octarr, int rootInd, vec3 pos, vec3 sp, float sr,
         n.isColored = 1;
         n.isIntact = 1;
         root->children[i] = octarr_add(octarr, n);
-        destroyCells(octarr, root->children[i], np, sp, sr, depth + 1);
+        destroyVoxels(octarr, root->children[i], np, sp, sr, depth + 1);
     }
+    collapseVoxel(octarr, rootInd);
 }

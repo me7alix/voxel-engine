@@ -65,15 +65,19 @@ void renderOctree(int rootInd, vec3 pos, float depth, vec3 ro, vec3 rd, out vec3
     color = vec3(0.2);
     vec3 oro = ro;
     float maxHP = 0.0;
-    vec3 lastHP = ro;
-    for(int k = 0; k < 20; k++){
+    vec3 lastHP = vec3(0);
+
+    int oldRootInd = rootInd;
+    vec3 oldPos = pos;
+    for(int k = 0; k < 25; k++){
         while(true){
             vec3 size = vec3(5.0 / pow(2.0, depth));
             if(octarr[rootInd].isIntact == 1){
                 if(octarr[rootInd].isColored == 1){
                     vec3 inter = box(oro, rd, pos, pos + size);
-                    //float c = dot(aabbNormal(pos, pos + size, inter.z * rd + ro), normalize(vec3(1., 1., 0.)));
-                    color = vec3(1.) - vec3(inter.z / 10.);
+                    float c = dot(aabbNormal(pos, pos + size, inter.z * rd + oro), normalize(vec3(-1., -1., 0.5)));
+                    //color = vec3(1.) - vec3(inter.z / 10.);
+                    color = max(vec3(c), vec3(0.1));
                     return;
                 }
                 ro = lastHP;
@@ -91,8 +95,6 @@ void renderOctree(int rootInd, vec3 pos, float depth, vec3 ro, vec3 rd, out vec3
                 int ind = octarr[rootInd].children[i];
                 bool isContaining = isPointInParallelepiped(nro, cpos, cpos + size);
                 if(isContaining) {
-                    //color = vec3(1, 0, 0);
-                    //return;
                     c = false;
                     inter = box(oro, rd, cpos, cpos + size);
                     lastHP = oro + rd * inter.y;
@@ -113,6 +115,9 @@ void renderOctree(int rootInd, vec3 pos, float depth, vec3 ro, vec3 rd, out vec3
             pos = npos;
             depth += 1.0;
         }
+        pos = oldPos;
+        rootInd = oldRootInd;
+        depth = 0.0;
     }
 }
 

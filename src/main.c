@@ -202,8 +202,11 @@ int main(void)
     root.isColored = 1;
     root.isIntact = 1;
     vec3 pos = {0, 0, 0};
+    //vec3 sp2 = {2.5, 2.5, 2.4};
     vec3 sp = {0, 0, 0};
-    destroyCells(octarr, octarr_add(octarr, root), pos, sp, 2.0, 0);
+    octarr_add(octarr, root);
+    destroyVoxels(octarr, 0, pos, sp, 2.0, 0);
+    //destroyVoxels(octarr, 0, pos, sp2, 1.0, 0);
     float movingSpeed = 0.03;
 
     while (!glfwWindowShouldClose(window)){
