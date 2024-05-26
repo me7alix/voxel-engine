@@ -42,35 +42,32 @@ void closest_point_on_aabb(vec3 point, vec3 min, vec3 max, vec3 closestRes) {
             closest[i] = point[i];
         }
     }
-    vec3_add(closestRes, closestRes, closest);
+    vec3_dup(closestRes, closest);
 }
 
 int sphere_intersects_aabb(vec3 sphere_center, float sphere_radius, vec3 aabb_min, vec3 aabb_max) {
-    vec3 closest_point = {0, 0, 0};
+    vec3 closest_point;
     closest_point_on_aabb(sphere_center, aabb_min, aabb_max, closest_point);
     vec3 difference;
     vec3_sub(difference, closest_point, sphere_center);
     float distance_squared = vec3_len(difference);
-    return distance_squared <= sphere_radius * sphere_radius;
+    return distance_squared <= sphere_radius;
 }
 
 void destroyCells(OctreeArray *octarr, int rootInd, vec3 pos, vec3 sp, float sr, int depth)
 {
     vec3 posM, size = {5.0 / powf(2.0, depth), 5.0 / powf(2.0, depth)};
     vec3_dup(posM, pos);
-    vec3_add(posM, posM, size);
+    vec3_add(posM, pos, size);
     if(!sphere_intersects_aabb(sp, sr, pos, posM)) return;
     Octree *root = &octarr->arr[rootInd];
-    if (depth == DEPTH)
-    {
+    if (depth == DEPTH){
         root->isColored = 0;
         root->isIntact = 1;
         return;
     }
-    if (!root->isIntact)
-    {
-        for (int i = 0; i < 8; i++)
-        {
+    if (!root->isIntact){
+        for (int i = 0; i < 8; i++){
             vec3 np = {0, 0, 0};
             vec3_scale(np, positions[i], size[0] / 2.0);
             vec3_add(np, np, pos);
@@ -79,8 +76,7 @@ void destroyCells(OctreeArray *octarr, int rootInd, vec3 pos, vec3 sp, float sr,
         return;
     }
     root->isIntact = 0;
-    for (int i = 0; i < 8; i++)
-    {
+    for (int i = 0; i < 8; i++){
         vec3 np = {0, 0, 0};
         vec3_scale(np, positions[i], size[0] / 2.0);
         vec3_add(np, np, pos);

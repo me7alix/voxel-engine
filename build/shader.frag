@@ -13,7 +13,7 @@ mat2 mrot(float a){
 }
 
 layout(std430, binding = 0) buffer OctreeBuffer {
-    Octree octreeArr[];
+    Octree octarr[];
 };
 
 uniform vec2 res;
@@ -64,12 +64,13 @@ bool isPointInParallelepiped(vec3 point, vec3 minBounds, vec3 maxBounds) {
 void renderOctree(int rootInd, vec3 pos, float depth, vec3 ro, vec3 rd, out vec3 color){
     color = vec3(0.2);
     vec3 oro = ro;
+    float maxHP = 0.0;
     vec3 lastHP = ro;
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < 50; i++){
         while(true){
             vec3 size = vec3(5.0 / pow(2.0, depth));
-            if(octreeArr[rootInd].isIntact == 1){
-                if(octreeArr[rootInd].isColored == 1){
+            if(octarr[rootInd].isIntact == 1){
+                if(octarr[rootInd].isColored == 1){
                     vec3 inter = box(oro, rd, pos, pos + size);
                     //float c = dot(aabbNormal(pos, pos + size, inter.z * rd + ro), normalize(vec3(1., 1., 0.)));
                     color = vec3(1.) - vec3(inter.z / 10.);
@@ -85,17 +86,23 @@ void renderOctree(int rootInd, vec3 pos, float depth, vec3 ro, vec3 rd, out vec3
             int nrootInd = 0;
             for(int i = 0; i < 8; i++){
                 vec3 cpos = pos + (positions[i] * size.x);
-                vec3 nro = ro + rd * 0.01;
-                vec3 inter = box(nro, rd, cpos, cpos + size);
-                int ind = octreeArr[rootInd].children[i];
-                bool isContaining = isPointInParallelepiped(nro, cpos, cpos + size);
-                if((inter.z < minDist && bool(inter.x)) || isContaining){
+                vec3 inter = box(ro, rd, cpos, cpos + size);
+                int ind = octarr[rootInd].children[i];
+                bool isContaining = isPointInParallelepiped(ro, cpos, cpos + size);
+                if(isContaining) {
                     c = false;
-                    lastHP = inter.y * rd + nro;
+                    inter = box(oro, rd, cpos, cpos + size);
+                    lastHP = inter.y * rd + oro + rd * 0.01;
+                    npos = cpos;
+                    nrootInd = ind;
+                    break;
+                }
+                if(inter.z < minDist && bool(inter.x)){
+                    c = false;
+                    lastHP = inter.y * rd + ro;
                     minDist = inter.z;
                     nrootInd = ind;
                     npos = cpos;
-                    if(isContaining) break;
                 }
             }
             if(c) break;

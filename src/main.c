@@ -164,10 +164,6 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
     lastCursorY = ypos;
 }
 
-void geta(vec3 a){
-    vec3_add(a, a, a);
-}
-
 int main(void)
 {
     GLFWwindow* window;
@@ -207,7 +203,7 @@ int main(void)
     root.isIntact = 1;
     vec3 pos = {0, 0, 0};
     vec3 sp = {0, 0, 0};
-    destroyCells(octarr, octarr_add(octarr, root), pos, sp, 1.5, 0);
+    destroyCells(octarr, octarr_add(octarr, root), pos, sp, 2.0, 0);
     float movingSpeed = 0.03;
 
     while (!glfwWindowShouldClose(window)){
@@ -231,8 +227,6 @@ int main(void)
 
         loc = glGetUniformLocation(shader_program, "angles");
         glUniform2f(loc, a_x, a_y);
-
-        //printf("%f, %f, %f\n", p_x, p_y, p_z);
 
 		setupSSBO(octarr->arr, shader_program);
 

@@ -4,7 +4,7 @@
 #include "../linmath.h"
 
 #define ARR_SIZE 10000
-#define DEPTH 4
+#define DEPTH 5
 
 typedef struct {
     int children[8];
