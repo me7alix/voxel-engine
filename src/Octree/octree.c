@@ -55,15 +55,14 @@ int sphere_intersects_aabb(vec3 sphere_center, float sphere_radius, vec3 aabb_mi
 }
 
 void collapseVoxel(OctreeArray *octarr, int rootInd){
-    Octree *root = &octarr->arr[rootInd];
     for(int i = 0; i < 8; i++){
-        Octree child = octarr->arr[root->children[i]];
+        Octree child = octarr->arr[octarr->arr[rootInd].children[i]];
         if(!child.isIntact || (
             child.isIntact && child.isColored
         )) return;
     }
-    root->isIntact = 1;
-    root->isColored = 0;
+    octarr->arr[rootInd].isIntact = 1;
+    octarr->arr[rootInd].isColored = 0;
 }
 
 void destroyVoxels(OctreeArray *octarr, int rootInd, vec3 pos, vec3 sp, float sr, int depth)
