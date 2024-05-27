@@ -47,6 +47,32 @@ vec3 box(vec3 ray_origin, vec3 ray_dir, vec3 minpos, vec3 maxpos) {
     return vec3(float(traversehi > max(traverselow, 0.0)), traversehi, traverselow);
 }
 
+vec3 cubeNml(vec3 i, vec3 bmin, vec3 bmax) {
+    float epsilon = 0.01;
+
+    float cx = abs(i.x - bmin.x);
+    float fx = abs(i.x - bmax.x);
+    float cy = abs(i.y - bmin.y);
+    float fy = abs(i.y - bmax.y);
+    float cz = abs(i.z - bmin.z);
+    float fz = abs(i.z - bmax.z);
+
+    if(cx < epsilon)
+        return vec3(-1.0, 0.0, 0.0);
+    else if (fx < epsilon)
+        return vec3(1.0, 0.0, 0.0);
+    else if (cy < epsilon)
+        return vec3(0.0, -1.0, 0.0);
+    else if (fy < epsilon)
+        return vec3(0.0, 1.0, 0.0);
+    else if (cz < epsilon)
+        return vec3(0.0, 0.0, -1.0);
+    else if (fz < epsilon)
+        return vec3(0.0, 0.0, 1.0);
+    
+    return vec3(0.0, 0.0, 0.0);
+}
+
 vec3 aabbNormal(const vec3 bmin, const vec3 bmax, const vec3 point) {
     const vec3 center = 0.5 * (bmin + bmax);
     const vec3 centerToPoint = point - center;
@@ -75,9 +101,11 @@ void renderOctree(int rootInd, vec3 pos, float depth, vec3 ro, vec3 rd, out vec3
             if(octarr[rootInd].isIntact == 1){
                 if(octarr[rootInd].isColored == 1){
                     vec3 inter = box(oro, rd, pos, pos + size);
-                    float c = dot(aabbNormal(pos, pos + size, inter.z * rd + oro), normalize(vec3(-1., -1., 0.5)));
+                    float c = dot(aabbNormal(pos, pos + size, inter.z * rd + oro), normalize(vec3(-1., -1., -1.)));
+                    //float c = dot(cubeNml(oro + rd * inter.z, pos, pos + size), normalize(vec3(-1., 1., 1.)));
                     //color = vec3(1.) - vec3(inter.z / 10.);
                     color = max(vec3(c), vec3(0.1));
+                    color *= pos / 5.0;
                     return;
                 }
                 ro = lastHP;

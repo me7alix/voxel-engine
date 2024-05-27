@@ -17,7 +17,7 @@ unsigned vao;
 unsigned int shader_program;
 
 const char* vertex_shader_source =
-        "#version 330 core\n"
+        "#version 430 core\n"
 		"layout (location = 0) in vec3 position;\n"
 		"layout (location = 1) in vec3 color;\n"
 		"out vec3 vertexColor;\n"
@@ -202,21 +202,20 @@ int main(void)
     vec3 pos = {0, 0, 0};
     vec3 sp = {0, 0, 0};
     octarr_add(octarr, root);
-    destroyVoxels(octarr, 0, pos, sp, 2.5, 0);
+    destroyVoxels(octarr, 0, pos, sp, 2.7, 0);
     float movingSpeed = 0.03;
 
     while (!glfwWindowShouldClose(window)){
         glClear(GL_COLOR_BUFFER_BIT);
         glUseProgram(shader_program);
 
-        a_x += (float)(deltaCursorX / SCREEN_WIDTH * PI * 2.0 * 1.8);
-        a_y += (float)(deltaCursorY / SCREEN_WIDTH * PI * 2.0 * 1.8);
+        a_x += (float)(deltaCursorX / SCREEN_WIDTH * PI * 2.0 * 2);
+        a_y += (float)(deltaCursorY / SCREEN_WIDTH * PI * 2.0 * 2);
         p_z += movingSpeed * dpz * sinf(a_x + PI / 2.0);
         p_x += movingSpeed * dpz * cosf(a_x + PI / 2.0);
         p_z += movingSpeed * dpx * sinf(a_x + PI);
         p_x += movingSpeed * dpx * cosf(a_x + PI);
         p_y += movingSpeed * dpy;
-        deltaCursorX = 0; deltaCursorY = 0;
 
         int loc = glGetUniformLocation(shader_program, "res");
         glUniform2f(loc, (float) SCREEN_WIDTH, (float) SCREEN_HEIGHT);
@@ -227,7 +226,7 @@ int main(void)
         loc = glGetUniformLocation(shader_program, "angles");
         glUniform2f(loc, a_x, a_y);
 
-		setupSSBO(octarr->arr, shader_program);
+		GLuint ssbo = setupSSBO(octarr->arr, shader_program);
 
         glfwSetCursorPos(window, SCREEN_WIDTH / 2.0, SCREEN_HEIGHT / 2.0);
         lastCursorX = SCREEN_WIDTH / 2.0;
@@ -235,6 +234,9 @@ int main(void)
 
         glBindVertexArray(vao);
         glDrawArrays(GL_TRIANGLES, 0, 6);
+        glDeleteBuffers(1, &ssbo);
+
+        deltaCursorX = 0; deltaCursorY = 0;
 
         glfwSwapBuffers(window);
         glfwPollEvents();

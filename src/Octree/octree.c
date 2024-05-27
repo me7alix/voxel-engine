@@ -12,7 +12,7 @@ OctreeArray *octarr_new(){
     return n;
 }
 
-void setupSSBO(Octree octreeArr[ARR_SIZE], unsigned int shaderProgram)
+GLuint setupSSBO(Octree octreeArr[ARR_SIZE], unsigned int shaderProgram)
 {
     GLuint ssbo;
     glGenBuffers(1, &ssbo);
@@ -24,6 +24,7 @@ void setupSSBO(Octree octreeArr[ARR_SIZE], unsigned int shaderProgram)
     glUniformBlockBinding(shaderProgram, blockIndex, 0);
     glBindBufferBase(GL_UNIFORM_BUFFER, 0, ssbo);
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
+    return ssbo;
 }
 
 vec3 positions[8] = {
