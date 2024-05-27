@@ -7,7 +7,7 @@ int octarr_add(OctreeArray *octarr, Octree a){
 }
 
 OctreeArray *octarr_new(){
-    OctreeArray *n = malloc(sizeof(OctreeArray));
+    OctreeArray *n = (OctreeArray *) malloc(sizeof(OctreeArray));
     n->pr = 0;
     return n;
 }
