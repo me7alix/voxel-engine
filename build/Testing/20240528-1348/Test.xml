@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="Linux-gcc"
+	BuildStamp="20240528-1348-Experimental"
+	Name="fedora"
+	Generator="ctest-3.29.3"
+	CompilerName=""
+	CompilerVersion=""
+	OSName="Linux"
+	Hostname="fedora"
+	OSRelease="6.8.10-200.fc39.x86_64"
+	OSVersion="#1 SMP PREEMPT_DYNAMIC Fri May 17 21:20:15 UTC 2024"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="GenuineIntel"
+	VendorID="Intel Corporation"
+	FamilyID="6"
+	ModelID="151"
+	ProcessorCacheSize="18432"
+	NumberOfLogicalCPU="12"
+	NumberOfPhysicalCPU="6"
+	TotalVirtualMemory="8191"
+	TotalPhysicalMemory="15796"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="4000"
+	>
+	<Testing>
+		<StartDateTime>May 29 00:44 MSK</StartDateTime>
+		<StartTestTime>1716932683</StartTestTime>
+		<TestList/>
+		<EndDateTime>May 29 00:44 MSK</EndDateTime>
+		<EndTestTime>1716932683</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

@@ -7,7 +7,7 @@ int octarr_add(OctreeArray *octarr, Octree a){
 }
 
 OctreeArray *octarr_new(){
-    OctreeArray *n = (OctreeArray *) malloc(sizeof(OctreeArray));
+    OctreeArray *n = malloc(sizeof(OctreeArray));
     n->pr = 0;
     return n;
 }
@@ -32,29 +32,6 @@ vec3 positions[8] = {
     {1, 0, 0}, {1, 0, 1}, {1, 1, 0}, {1, 1, 1},
 };
 
-void closest_point_on_aabb(vec3 point, vec3 min, vec3 max, vec3 closestRes) {
-    vec3 closest;
-    for (int i = 0; i < 3; ++i) {
-        if (point[i] < min[i]) {
-            closest[i] = min[i];
-        } else if (point[i] > max[i]) {
-            closest[i] = max[i];
-        } else {
-            closest[i] = point[i];
-        }
-    }
-    vec3_dup(closestRes, closest);
-}
-
-int sphere_intersects_aabb(vec3 sphere_center, float sphere_radius, vec3 aabb_min, vec3 aabb_max) {
-    vec3 closest_point;
-    closest_point_on_aabb(sphere_center, aabb_min, aabb_max, closest_point);
-    vec3 difference;
-    vec3_sub(difference, closest_point, sphere_center);
-    float distance_squared = vec3_len(difference);
-    return distance_squared <= sphere_radius;
-}
-
 void collapseVoxel(OctreeArray *octarr, int rootInd){
     for(int i = 0; i < 8; i++){
         Octree child = octarr->arr[octarr->arr[rootInd].children[i]];
@@ -64,6 +41,21 @@ void collapseVoxel(OctreeArray *octarr, int rootInd){
     }
     octarr->arr[rootInd].isIntact = 1;
     octarr->arr[rootInd].isColored = 0;
+    octarr->arr[rootInd].isCollapsed = 1;
+}
+
+float squared(float v) { return v * v; }
+int doesCubeIntersectSphere(vec3 C1, vec3 C2, vec3 S, float R)
+{
+    float dist_squared = R * R;
+    /* assume C1 and C2 are element-wise sorted, if not, do that now */
+    if (S[0] < C1[0]) dist_squared -= squared(S[0] - C1[0]);
+    else if (S[0] > C2[0]) dist_squared -= squared(S[0] - C2[0]);
+    if (S[1] < C1[1]) dist_squared -= squared(S[1] - C1[1]);
+    else if (S[1] > C2[1]) dist_squared -= squared(S[1] - C2[1]);
+    if (S[2] < C1[2]) dist_squared -= squared(S[2] - C1[2]);
+    else if (S[2] > C2[2]) dist_squared -= squared(S[2] - C2[2]);
+    return dist_squared > 0;
 }
 
 void destroyVoxels(OctreeArray *octarr, int rootInd, vec3 pos, vec3 sp, float sr, int depth)
@@ -71,14 +63,14 @@ void destroyVoxels(OctreeArray *octarr, int rootInd, vec3 pos, vec3 sp, float sr
     vec3 posM, size = {5.0 / powf(2.0, depth), 5.0 / powf(2.0, depth)};
     vec3_dup(posM, pos);
     vec3_add(posM, pos, size);
-    if(!sphere_intersects_aabb(sp, sr, pos, posM)) return;
-    Octree *root = &octarr->arr[rootInd];
+    if(!doesCubeIntersectSphere(pos, posM, sp, sr)) return;
+    Octree *root = octarr->arr + rootInd;
     if (depth == DEPTH){
         root->isColored = 0;
         root->isIntact = 1;
         return;
     }
-    if (!root->isIntact){
+    if (!root->isIntact || root->isCollapsed){
         for (int i = 0; i < 8; i++){
             vec3 np = {0, 0, 0};
             vec3_scale(np, positions[i], size[0] / 2.0);
@@ -96,6 +88,7 @@ void destroyVoxels(OctreeArray *octarr, int rootInd, vec3 pos, vec3 sp, float sr
         Octree n;
         n.isColored = 1;
         n.isIntact = 1;
+        n.isCollapsed = 0;
         root->children[i] = octarr_add(octarr, n);
         destroyVoxels(octarr, root->children[i], np, sp, sr, depth + 1);
     }

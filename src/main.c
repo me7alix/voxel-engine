@@ -162,6 +162,22 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
     lastCursorY = ypos;
 }
 
+OctreeArray *octarr;
+
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods){
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS){
+        vec3 pos = {0, 0, 0};
+        vec3 sp = {0, 0, 0};
+        //sp[0] = 1.0 * sinf(a_x + PI) + p_x;
+        //sp[1] = p_y;
+        //sp[2] = 1.0 * cosf(a_x + PI) + p_z;
+        sp[0] = p_x;
+        sp[1] = p_y;
+        sp[2] = p_z;
+        destroyVoxels(octarr, 0, pos, sp, 2., 0);
+    }
+}
+
 int main(void)
 {
     GLFWwindow* window;
@@ -183,9 +199,13 @@ int main(void)
     glfwMakeContextCurrent(window);
     glfwSetKeyCallback(window, key_callback);
     glfwSetCursorPosCallback(window, cursor_position_callback);
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
 
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     glfwSetCursorPos(window, SCREEN_WIDTH / 2.0, SCREEN_HEIGHT / 2.0);
+
+    if (glfwRawMouseMotionSupported())
+        glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
     	glfwTerminate();
@@ -195,10 +215,11 @@ int main(void)
     setup_shader();
     setup_data();
 
-    OctreeArray *octarr = octarr_new();
+    octarr = octarr_new();
     Octree root;
     root.isColored = 1;
     root.isIntact = 1;
+    root.isCollapsed = 0;
     vec3 pos = {0, 0, 0};
     vec3 sp = {0, 0, 0};
     octarr_add(octarr, root);
@@ -209,13 +230,14 @@ int main(void)
         glClear(GL_COLOR_BUFFER_BIT);
         glUseProgram(shader_program);
 
-        a_x += (float)(deltaCursorX / SCREEN_WIDTH * PI * 2.0 * 2);
-        a_y += (float)(deltaCursorY / SCREEN_WIDTH * PI * 2.0 * 2);
+        a_x += (float)(deltaCursorX / SCREEN_WIDTH * PI * 2.0 * 1.5);
+        a_y += (float)(deltaCursorY / SCREEN_WIDTH * PI * 2.0 * 1.5);
         p_z += movingSpeed * dpz * sinf(a_x + PI / 2.0);
         p_x += movingSpeed * dpz * cosf(a_x + PI / 2.0);
         p_z += movingSpeed * dpx * sinf(a_x + PI);
         p_x += movingSpeed * dpx * cosf(a_x + PI);
         p_y += movingSpeed * dpy;
+
 
         int loc = glGetUniformLocation(shader_program, "res");
         glUniform2f(loc, (float) SCREEN_WIDTH, (float) SCREEN_HEIGHT);

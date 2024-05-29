@@ -4,6 +4,7 @@ struct Octree {
      int children[8];
      int isIntact;
      int isColored;
+     int isCollapsed;
 };
 
 mat2 mrot(float a){

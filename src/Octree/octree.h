@@ -3,13 +3,14 @@
 #include "../Glad/glad.h"
 #include "../linmath.h"
 
-#define ARR_SIZE 100000
+#define ARR_SIZE 200000
 #define DEPTH 6
 
 typedef struct {
     int children[8];
     int isIntact;
     int isColored;
+    int isCollapsed;
 } Octree;
 
 typedef struct {
