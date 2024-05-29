@@ -219,7 +219,6 @@ int main(void)
     Octree root;
     root.isColored = 1;
     root.isIntact = 1;
-    root.isCollapsed = 0;
     vec3 pos = {0, 0, 0};
     vec3 sp = {0, 0, 0};
     octarr_add(octarr, root);

@@ -4,7 +4,6 @@ struct Octree {
      int children[8];
      int isIntact;
      int isColored;
-     int isCollapsed;
 };
 
 mat2 mrot(float a){
@@ -78,7 +77,7 @@ vec3 aabbNormal(const vec3 bmin, const vec3 bmax, const vec3 point) {
     const vec3 center = 0.5 * (bmin + bmax);
     const vec3 centerToPoint = point - center;
     const vec3 halfSize = 0.5 * (bmax - bmin);
-    return normalize(sign(centerToPoint) * step(-0.005, abs(centerToPoint) - halfSize));
+    return normalize(sign(centerToPoint) * step(-0.0025, abs(centerToPoint) - halfSize));
 }
 
 bool isPointInParallelepiped(vec3 point, vec3 minBounds, vec3 maxBounds) {

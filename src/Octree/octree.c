@@ -58,7 +58,6 @@ void collapseVoxel(OctreeArray *octarr, int rootInd){
     }
     octarr->arr[rootInd].isIntact = 1;
     octarr->arr[rootInd].isColored = 0;
-    octarr->arr[rootInd].isCollapsed = 1;
 }
 
 float squared(float v) { return v * v; }
@@ -86,7 +85,7 @@ void destroyVoxels(OctreeArray *octarr, int rootInd, vec3 pos, vec3 sp, float sr
         root->isIntact = 1;
         return;
     }
-    if (!root->isIntact){ // || isCollapsed
+    if (!root->isIntact){
         for (int i = 0; i < 8; i++){
             vec3 np = {0, 0, 0};
             vec3_scale(np, positions[i], size[0] / 2.0);
@@ -105,7 +104,6 @@ void destroyVoxels(OctreeArray *octarr, int rootInd, vec3 pos, vec3 sp, float sr
         Octree n;
         n.isColored = 1;
         n.isIntact = 1;
-        n.isCollapsed = 0;
         root->children[i] = octarr_add(octarr, n);
         destroyVoxels(octarr, root->children[i], np, sp, sr, depth + 1);
     }
