@@ -78,7 +78,7 @@ vec3 aabbNormal(const vec3 bmin, const vec3 bmax, const vec3 point) {
     const vec3 center = 0.5 * (bmin + bmax);
     const vec3 centerToPoint = point - center;
     const vec3 halfSize = 0.5 * (bmax - bmin);
-    return normalize(sign(centerToPoint) * step(-0.01, abs(centerToPoint) - halfSize));
+    return normalize(sign(centerToPoint) * step(-0.005, abs(centerToPoint) - halfSize));
 }
 
 bool isPointInParallelepiped(vec3 point, vec3 minBounds, vec3 maxBounds) {
@@ -96,7 +96,7 @@ void renderOctree(int rootInd, vec3 pos, float depth, vec3 ro, vec3 rd, out vec3
 
     int oldRootInd = rootInd;
     vec3 oldPos = pos;
-    for(int k = 0; k < 30; k++){
+    for(int k = 0; k < 50; k++){
         while(true){
             vec3 size = vec3(5.0 / pow(2.0, depth));
             if(octarr[rootInd].isIntact == 1){
@@ -139,7 +139,7 @@ void renderOctree(int rootInd, vec3 pos, float depth, vec3 ro, vec3 rd, out vec3
                     npos = cpos;
                 }
             }
-            if(c) break;
+            if(c) return;
             rootInd = nrootInd;
             pos = npos;
             depth += 1.0;

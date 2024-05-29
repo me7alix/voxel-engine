@@ -3,7 +3,7 @@
 #include "../Glad/glad.h"
 #include "../linmath.h"
 
-#define ARR_SIZE 1000000
+#define ARR_SIZE 400000
 #define DEPTH 7
 
 typedef struct {
@@ -15,9 +15,12 @@ typedef struct {
 
 typedef struct {
     Octree arr[ARR_SIZE];
+    int aids[ARR_SIZE];
+    int stpr;
     int pr;
 } OctreeArray;
 
+void octarr_remove(OctreeArray *octarr, int index);
 int octarr_add(OctreeArray *octarr, Octree a);
 GLuint setupSSBO(Octree octreeArr[ARR_SIZE], unsigned int shaderProgram);
 void boxInter(vec3 rayOrigin, vec3 rayDir, vec3 boxMin, vec3 boxMax, vec2 *result);

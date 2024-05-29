@@ -2,17 +2,29 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define TRUE 1
-#define FALSE 0
+
 
 int octarr_add(OctreeArray *octarr, Octree a){
-    octarr->arr[octarr->pr] = a;
-    return octarr->pr++;
+    //octarr->arr[octarr->pr] = a;
+    //return octarr->pr++;
+
+    int index = octarr->aids[octarr->stpr--];
+    octarr->arr[index] = a;
+    return index;
+
+}
+
+void octarr_remove(OctreeArray *octarr, int index){
+    octarr->aids[++octarr->stpr] = index;
 }
 
 OctreeArray *octarr_new(){
     OctreeArray *n = malloc(sizeof(OctreeArray));
+    n->stpr = ARR_SIZE - 1;
     n->pr = 0;
+    for(int i = 0; i < ARR_SIZE; i++){
+        n->aids[i] = ARR_SIZE - i - 1;
+    }
     return n;
 }
 
@@ -39,9 +51,10 @@ vec3 positions[8] = {
 void collapseVoxel(OctreeArray *octarr, int rootInd){
     for(int i = 0; i < 8; i++){
         Octree child = octarr->arr[octarr->arr[rootInd].children[i]];
-        if(!child.isIntact || (
-            child.isIntact && child.isColored
-        )) return;
+        if(!child.isIntact || child.isColored) return;
+    }
+    for(int i = 0; i < 8; i++) {
+        octarr_remove(octarr, octarr->arr[rootInd].children[i]);
     }
     octarr->arr[rootInd].isIntact = 1;
     octarr->arr[rootInd].isColored = 0;
@@ -73,7 +86,7 @@ void destroyVoxels(OctreeArray *octarr, int rootInd, vec3 pos, vec3 sp, float sr
         root->isIntact = 1;
         return;
     }
-    if (!root->isIntact || root->isCollapsed){
+    if (!root->isIntact){ // || isCollapsed
         for (int i = 0; i < 8; i++){
             vec3 np = {0, 0, 0};
             vec3_scale(np, positions[i], size[0] / 2.0);
@@ -83,6 +96,7 @@ void destroyVoxels(OctreeArray *octarr, int rootInd, vec3 pos, vec3 sp, float sr
         collapseVoxel(octarr, rootInd);
         return;
     }
+    if(root->isIntact && !root->isColored) return;
     root->isIntact = 0;
     for (int i = 0; i < 8; i++){
         vec3 np = {0, 0, 0};
