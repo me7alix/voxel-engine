@@ -1,5 +1,9 @@
 #include "octree.h"
 #include <stdlib.h>
+#include <stdio.h>
+
+#define TRUE 1
+#define FALSE 0
 
 int octarr_add(OctreeArray *octarr, Octree a){
     octarr->arr[octarr->pr] = a;
@@ -48,7 +52,6 @@ float squared(float v) { return v * v; }
 int doesCubeIntersectSphere(vec3 C1, vec3 C2, vec3 S, float R)
 {
     float dist_squared = R * R;
-    /* assume C1 and C2 are element-wise sorted, if not, do that now */
     if (S[0] < C1[0]) dist_squared -= squared(S[0] - C1[0]);
     else if (S[0] > C2[0]) dist_squared -= squared(S[0] - C2[0]);
     if (S[1] < C1[1]) dist_squared -= squared(S[1] - C1[1]);
@@ -60,9 +63,9 @@ int doesCubeIntersectSphere(vec3 C1, vec3 C2, vec3 S, float R)
 
 void destroyVoxels(OctreeArray *octarr, int rootInd, vec3 pos, vec3 sp, float sr, int depth)
 {
-    vec3 posM, size = {5.0 / powf(2.0, depth), 5.0 / powf(2.0, depth)};
+    vec3 posM, size = {5.0 / powf(2.0, depth), 5.0 / powf(2.0, depth), 5.0 / powf(2.0, depth)};
     vec3_dup(posM, pos);
-    vec3_add(posM, pos, size);
+    vec3_add(posM, posM, size);
     if(!doesCubeIntersectSphere(pos, posM, sp, sr)) return;
     Octree *root = octarr->arr + rootInd;
     if (depth == DEPTH){

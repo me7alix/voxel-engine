@@ -94,6 +94,7 @@ CMakeFiles/voxelengine.dir/src/Octree/octree.c.o: /mnt/9E4668B146688BB9/CProject
   /usr/include/bits/select.h \
   /usr/include/bits/stdint-intn.h \
   /usr/include/bits/stdint-uintn.h \
+  /usr/include/bits/stdio_lim.h \
   /usr/include/bits/stdlib-float.h \
   /usr/include/bits/struct_mutex.h \
   /usr/include/bits/struct_rwlock.h \
@@ -101,12 +102,19 @@ CMakeFiles/voxelengine.dir/src/Octree/octree.c.o: /mnt/9E4668B146688BB9/CProject
   /usr/include/bits/time64.h \
   /usr/include/bits/timesize.h \
   /usr/include/bits/types.h \
+  /usr/include/bits/types/FILE.h \
+  /usr/include/bits/types/__FILE.h \
+  /usr/include/bits/types/__fpos64_t.h \
+  /usr/include/bits/types/__fpos_t.h \
   /usr/include/bits/types/__locale_t.h \
+  /usr/include/bits/types/__mbstate_t.h \
   /usr/include/bits/types/__sigset_t.h \
   /usr/include/bits/types/clock_t.h \
   /usr/include/bits/types/clockid_t.h \
+  /usr/include/bits/types/cookie_io_functions_t.h \
   /usr/include/bits/types/locale_t.h \
   /usr/include/bits/types/sigset_t.h \
+  /usr/include/bits/types/struct_FILE.h \
   /usr/include/bits/types/struct_timespec.h \
   /usr/include/bits/types/struct_timeval.h \
   /usr/include/bits/types/time_t.h \
@@ -125,12 +133,14 @@ CMakeFiles/voxelengine.dir/src/Octree/octree.c.o: /mnt/9E4668B146688BB9/CProject
   /usr/include/math.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
+  /usr/include/stdio.h \
   /usr/include/stdlib.h \
   /usr/include/string.h \
   /usr/include/strings.h \
   /usr/include/sys/cdefs.h \
   /usr/include/sys/select.h \
   /usr/include/sys/types.h \
+  /usr/lib/gcc/x86_64-redhat-linux/13/include/stdarg.h \
   /usr/lib/gcc/x86_64-redhat-linux/13/include/stddef.h \
   /usr/lib/gcc/x86_64-redhat-linux/13/include/stdint.h
 

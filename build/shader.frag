@@ -96,7 +96,7 @@ void renderOctree(int rootInd, vec3 pos, float depth, vec3 ro, vec3 rd, out vec3
 
     int oldRootInd = rootInd;
     vec3 oldPos = pos;
-    for(int k = 0; k < 25; k++){
+    for(int k = 0; k < 30; k++){
         while(true){
             vec3 size = vec3(5.0 / pow(2.0, depth));
             if(octarr[rootInd].isIntact == 1){
@@ -106,7 +106,7 @@ void renderOctree(int rootInd, vec3 pos, float depth, vec3 ro, vec3 rd, out vec3
                     //float c = dot(cubeNml(oro + rd * inter.z, pos, pos + size), normalize(vec3(-1., 1., 1.)));
                     //color = vec3(1.) - vec3(inter.z / 10.);
                     color = max(vec3(c), vec3(0.1));
-                    color *= pos / 5.0;
+                    color *= abs(pos-vec3(2.5)) / 5.0;
                     return;
                 }
                 ro = lastHP;
@@ -120,7 +120,7 @@ void renderOctree(int rootInd, vec3 pos, float depth, vec3 ro, vec3 rd, out vec3
             for(int i = 0; i < 8; i++){
                 vec3 cpos = pos + (positions[i] * size.x);
                 vec3 inter = box(ro, rd, cpos, cpos + size);
-                vec3 nro = ro + rd * 0.01;
+                vec3 nro = ro + rd * 0.001;
                 int ind = octarr[rootInd].children[i];
                 bool isContaining = isPointInParallelepiped(nro, cpos, cpos + size);
                 if(isContaining) {

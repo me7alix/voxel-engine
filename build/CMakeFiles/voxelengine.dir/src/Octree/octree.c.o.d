@@ -38,4 +38,10 @@ CMakeFiles/voxelengine.dir/src/Octree/octree.c.o: \
  /usr/include/bits/pthreadtypes-arch.h \
  /usr/include/bits/atomic_wide_counter.h /usr/include/bits/struct_mutex.h \
  /usr/include/bits/struct_rwlock.h /usr/include/alloca.h \
- /usr/include/bits/stdlib-float.h
+ /usr/include/bits/stdlib-float.h /usr/include/stdio.h \
+ /usr/lib/gcc/x86_64-redhat-linux/13/include/stdarg.h \
+ /usr/include/bits/types/__fpos_t.h /usr/include/bits/types/__mbstate_t.h \
+ /usr/include/bits/types/__fpos64_t.h /usr/include/bits/types/__FILE.h \
+ /usr/include/bits/types/FILE.h /usr/include/bits/types/struct_FILE.h \
+ /usr/include/bits/types/cookie_io_functions_t.h \
+ /usr/include/bits/stdio_lim.h

@@ -10,8 +10,8 @@
 
 #define PI 3.1415926
 
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 600;
+const int SCREEN_WIDTH = 1440;
+const int SCREEN_HEIGHT = 900;
 
 unsigned vao;
 unsigned int shader_program;
@@ -174,7 +174,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
         sp[0] = p_x;
         sp[1] = p_y;
         sp[2] = p_z;
-        destroyVoxels(octarr, 0, pos, sp, 2., 0);
+        destroyVoxels(octarr, 0, pos, sp, 1., 0);
     }
 }
 
@@ -189,7 +189,7 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "OpenGL", NULL, 0);
+    window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "OpenGL", glfwGetPrimaryMonitor(), 0);
 
     if (!window){
         glfwTerminate();
