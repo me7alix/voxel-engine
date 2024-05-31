@@ -24,4 +24,5 @@ int octarr_add(OctreeArray *octarr, Octree a);
 GLuint setupSSBO(Octree octreeArr[ARR_SIZE], unsigned int shaderProgram);
 void boxInter(vec3 rayOrigin, vec3 rayDir, vec3 boxMin, vec3 boxMax, vec2 *result);
 void destroyVoxels(OctreeArray *octarr, int rootInd, vec3 pos, vec3 sp, float sr, int depth);
+void addVoxels(OctreeArray *octarr, int rootInd, vec3 pos, vec3 sp, float sr, int depth);
 OctreeArray *octarr_new();

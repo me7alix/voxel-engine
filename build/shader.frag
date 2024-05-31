@@ -47,32 +47,6 @@ vec3 box(vec3 ray_origin, vec3 ray_dir, vec3 minpos, vec3 maxpos) {
     return vec3(float(traversehi > max(traverselow, 0.0)), traversehi, traverselow);
 }
 
-vec3 cubeNml(vec3 i, vec3 bmin, vec3 bmax) {
-    float epsilon = 0.01;
-
-    float cx = abs(i.x - bmin.x);
-    float fx = abs(i.x - bmax.x);
-    float cy = abs(i.y - bmin.y);
-    float fy = abs(i.y - bmax.y);
-    float cz = abs(i.z - bmin.z);
-    float fz = abs(i.z - bmax.z);
-
-    if(cx < epsilon)
-        return vec3(-1.0, 0.0, 0.0);
-    else if (fx < epsilon)
-        return vec3(1.0, 0.0, 0.0);
-    else if (cy < epsilon)
-        return vec3(0.0, -1.0, 0.0);
-    else if (fy < epsilon)
-        return vec3(0.0, 1.0, 0.0);
-    else if (cz < epsilon)
-        return vec3(0.0, 0.0, -1.0);
-    else if (fz < epsilon)
-        return vec3(0.0, 0.0, 1.0);
-    
-    return vec3(0.0, 0.0, 0.0);
-}
-
 vec3 aabbNormal(const vec3 bmin, const vec3 bmax, const vec3 point) {
     const vec3 center = 0.5 * (bmin + bmax);
     const vec3 centerToPoint = point - center;

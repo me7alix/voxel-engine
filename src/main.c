@@ -162,19 +162,24 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
     lastCursorY = ypos;
 }
 
+void spherical_to_cartesian(float r, float theta, float phi, vec3 result) {
+    result[0] = r * sinf(theta) * cosf(phi); // x
+    result[1] = r * sinf(theta) * sinf(phi); // y
+    result[2] = r * cosf(theta);             // z
+}
+
 OctreeArray *octarr;
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods){
+    vec3 pos = {0, 0, 0};
+    vec3 sp = {0, 0, 0};
+    //spherical_to_cartesian(1.0, -p_x + PI/2.0, PI / 2.0, sp);
+    sp[0] += p_x; sp[1] += p_y; sp[2] += p_z;
+    if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS){
+        destroyVoxels(octarr, 0, pos, sp, 0.7, 0);
+    }
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS){
-        vec3 pos = {0, 0, 0};
-        vec3 sp = {0, 0, 0};
-        //sp[0] = 1.0 * sinf(a_x + PI) + p_x;
-        //sp[1] = p_y;
-        //sp[2] = 1.0 * cosf(a_x + PI) + p_z;
-        sp[0] = p_x;
-        sp[1] = p_y;
-        sp[2] = p_z;
-        destroyVoxels(octarr, 0, pos, sp, 1., 0);
+        addVoxels(octarr, 0, pos, sp, 0.4, 0);
     }
 }
 
