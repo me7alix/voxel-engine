@@ -27,7 +27,7 @@ SubmitInactivityTimeout:
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "/home/proger/.local/lib/python3.12/site-packages/cmake/data/bin/cmake" "/mnt/9E4668B146688BB9/CProjects/voxel-engine"
+ConfigureCommand: "/usr/bin/cmake" "/mnt/9E4668B146688BB9/CProjects/voxel-engine"
 MakeCommand: /usr/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}" -- -i
 DefaultCTestConfigurationType: Release
 

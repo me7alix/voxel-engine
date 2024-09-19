@@ -1,7 +1,7 @@
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
-#include "Glad/glad.h"
-#include "Octree/octree.h"
+#include "glad/glad.h"
+#include "octree/octree.h"
 #include "linmath.h"
 #include <stdlib.h>
 #include <stddef.h>
@@ -55,7 +55,7 @@ void setup_shader()
     glShaderSource(vertex_shader, 1, &vertex_shader_source, NULL);
     glCompileShader(vertex_shader);
 
-    char* fragment_shader_source = read_file("shader.frag");
+    char* fragment_shader_source = read_file("../src/shaders/shader.frag");
     if (!fragment_shader_source) {
         fprintf(stderr, "Failed to load fragment shader\n");
         return;
@@ -169,6 +169,7 @@ void spherical_to_cartesian(float r, float theta, float phi, vec3 result) {
 }
 
 OctreeArray *octarr;
+GLuint ssbo;
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods){
     vec3 pos = {0, 0, 0};
@@ -181,6 +182,8 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS){
         addVoxels(octarr, 0, pos, sp, 0.4, 0);
     }
+    glDeleteBuffers(1, &ssbo);
+    GLuint ssbo = setupSSBO(octarr->arr, shader_program);
 }
 
 int main(void)
@@ -229,7 +232,7 @@ int main(void)
     octarr_add(octarr, root);
     destroyVoxels(octarr, 0, pos, sp, 2.7, 0);
     float movingSpeed = 0.03;
-
+    ssbo = setupSSBO(octarr->arr, shader_program);
     while (!glfwWindowShouldClose(window)){
         glClear(GL_COLOR_BUFFER_BIT);
         glUseProgram(shader_program);
@@ -252,7 +255,7 @@ int main(void)
         loc = glGetUniformLocation(shader_program, "angles");
         glUniform2f(loc, a_x, a_y);
 
-		GLuint ssbo = setupSSBO(octarr->arr, shader_program);
+		//GLuint ssbo = setupSSBO(octarr->arr, shader_program);
 
         glfwSetCursorPos(window, SCREEN_WIDTH / 2.0, SCREEN_HEIGHT / 2.0);
         lastCursorX = SCREEN_WIDTH / 2.0;
@@ -260,7 +263,7 @@ int main(void)
 
         glBindVertexArray(vao);
         glDrawArrays(GL_TRIANGLES, 0, 6);
-        glDeleteBuffers(1, &ssbo);
+        //glDeleteBuffers(1, &ssbo);
 
         deltaCursorX = 0; deltaCursorY = 0;
 
