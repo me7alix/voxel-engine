@@ -52,7 +52,7 @@ vec3 aabbNormal(const vec3 bmin, const vec3 bmax, const vec3 point) {
     const vec3 center = 0.5 * (bmin + bmax);
     const vec3 centerToPoint = point - center;
     const vec3 halfSize = 0.5 * (bmax - bmin);
-    return normalize(sign(centerToPoint) * step(-0.0025, abs(centerToPoint) - halfSize));
+    return normalize(sign(centerToPoint) * step(-0.00125, abs(centerToPoint) - halfSize));
 }
 
 bool isPointInParallelepiped(vec3 point, vec3 minBounds, vec3 maxBounds) {
@@ -62,49 +62,63 @@ bool isPointInParallelepiped(vec3 point, vec3 minBounds, vec3 maxBounds) {
 }
 
 
-void renderOctree(int rootInd, vec3 pos, vec3 ro, vec3 rd, out vec3 color){
-    color = vec3(0.5, 0.5, 1.);
-    int stInd[128];
-    vec3 stPos[128];
-    int stDepth[128];
-    int stpr = 0;
-    float minDists[32];
-    for(int i = 0; i < 32; i++)
-        minDists[i] = 99999.0;
-    stInd[stpr] = rootInd;
-    stPos[stpr] = pos;
-    stDepth[stpr++] = 0;
-    while(stpr > 0){
-        rootInd = stInd[--stpr];
-        pos = stPos[stpr];
-        int depth = stDepth[stpr];
-        vec3 size = vec3(5.0 / pow(2, depth));
-        if(octarr[rootInd].isIntact == 1){
-            if(octarr[rootInd].isColored == 1){
-                vec3 inter = box(ro, rd, pos, pos + size);
-                float c = dot(aabbNormal(pos, pos + size, inter.z * rd + ro), normalize(vec3(-1., -1., -1.)));
-                if(abs(inter.z - minDists[depth]) > 0.0001) continue;
-                color = max(vec3(c), vec3(0.1));
-                color *= abs(pos-vec3(0.0)) / 5.0;
-                continue;
-                //if(abs(inter.z - minDists[depth]) <= 0.001) return;
-                //if(inter.z != minDists[depth]) continue;
+void renderOctree(int rootInd, vec3 pos, float depth, vec3 ro, vec3 rd, out vec3 color){
+    vec3 oro = ro;
+    float maxHP = 0.0;
+    vec3 lastHP = vec3(0);
+
+    int oldRootInd = rootInd;
+    vec3 oldPos = pos;
+    for(int k = 0; k < 90; k++){
+        while(true){
+            vec3 size = vec3(5.0 / pow(2.0, depth));
+            if(octarr[rootInd].isIntact == 1){
+                if(octarr[rootInd].isColored == 1){
+                    vec3 inter = box(oro, rd, pos, pos + size);
+                    float c = dot(aabbNormal(pos, pos + size, inter.z * rd + oro), normalize(vec3(-1., -1., -1.)));
+                    //float c = dot(cubeNml(oro + rd * inter.z, pos, pos + size), normalize(vec3(-1., 1., 1.)));
+                    //color = vec3(1.) - vec3(inter.z / 10.);
+                    color = max(vec3(c), vec3(0.1));
+                    color *= abs(pos-vec3(0.0)) / 5.0;
+                    return;
+                }
+                ro = lastHP;
+                break;
             }
-            continue;
-        }
-        size /= 2.0;
-        depth++;
-        for(int i = 0; i < 8; i++){
-            vec3 cpos = pos + (positions[i] * size.x);
-            vec3 inter = box(ro, rd, cpos, cpos + size);
-            if(inter.x > 0.5){
-                stInd[stpr] = octarr[rootInd].children[i];
-                stPos[stpr] = cpos;
-                stDepth[stpr] = depth;
-                minDists[depth] = min(inter.z, minDists[depth]);
-                stpr++;
+            size /= 2.0;
+            float minDist = 999999.0;
+            vec3 npos = vec3(0);
+            bool c = true;
+            int nrootInd = 0;
+            for(int i = 0; i < 8; i++){
+                vec3 cpos = pos + (positions[i] * size.x);
+                vec3 inter;
+                vec3 nro = ro + rd * 0.0001;
+                if(isPointInParallelepiped(nro, cpos, cpos + size)) {
+                    c = false;
+                    inter = box(oro, rd, cpos, cpos + size);
+                    lastHP = oro + rd * inter.y;
+                    nrootInd = octarr[rootInd].children[i];
+                    npos = cpos;
+                    break;
+                }
+                inter = box(ro, rd, cpos, cpos + size);
+                if(inter.z < minDist && bool(inter.x)){
+                    c = false;
+                    lastHP = inter.y * rd + ro;
+                    nrootInd = octarr[rootInd].children[i];
+                    minDist = inter.z;
+                    npos = cpos;
+                }
             }
+            if(c) return;
+            rootInd = nrootInd;
+            pos = npos;
+            depth += 1.0;
         }
+        pos = oldPos;
+        rootInd = oldRootInd;
+        depth = 0.0;
     }
 }
 
@@ -115,6 +129,6 @@ void main() {
     rd.xz *= -mrot(angles.x);
     vec3 ro = position;
     vec3 color = vec3(1);
-    renderOctree(0, vec3(0), ro, rd, color);
+    renderOctree(0, vec3(0), 0.0, ro, rd, color);
     fragColor = vec4(color, 1.0);
 }

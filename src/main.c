@@ -10,8 +10,8 @@
 
 #define PI 3.1415926
 
-const int SCREEN_WIDTH = 1440;
-const int SCREEN_HEIGHT = 900;
+const int SCREEN_WIDTH = 1920;
+const int SCREEN_HEIGHT = 1080;
 
 unsigned vao;
 unsigned int shader_program;
