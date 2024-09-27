@@ -523,53 +523,29 @@ voxelengine/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxelengine.dir/build.make CMakeFiles/voxelengine.dir/build
 .PHONY : voxelengine/fast
 
-src/Glad/glad.o: src/Glad/glad.c.o
-.PHONY : src/Glad/glad.o
+src/glad/glad.o: src/glad/glad.c.o
+.PHONY : src/glad/glad.o
 
 # target to build an object file
-src/Glad/glad.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxelengine.dir/build.make CMakeFiles/voxelengine.dir/src/Glad/glad.c.o
-.PHONY : src/Glad/glad.c.o
+src/glad/glad.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxelengine.dir/build.make CMakeFiles/voxelengine.dir/src/glad/glad.c.o
+.PHONY : src/glad/glad.c.o
 
-src/Glad/glad.i: src/Glad/glad.c.i
-.PHONY : src/Glad/glad.i
-
-# target to preprocess a source file
-src/Glad/glad.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxelengine.dir/build.make CMakeFiles/voxelengine.dir/src/Glad/glad.c.i
-.PHONY : src/Glad/glad.c.i
-
-src/Glad/glad.s: src/Glad/glad.c.s
-.PHONY : src/Glad/glad.s
-
-# target to generate assembly for a file
-src/Glad/glad.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxelengine.dir/build.make CMakeFiles/voxelengine.dir/src/Glad/glad.c.s
-.PHONY : src/Glad/glad.c.s
-
-src/Octree/octree.o: src/Octree/octree.c.o
-.PHONY : src/Octree/octree.o
-
-# target to build an object file
-src/Octree/octree.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxelengine.dir/build.make CMakeFiles/voxelengine.dir/src/Octree/octree.c.o
-.PHONY : src/Octree/octree.c.o
-
-src/Octree/octree.i: src/Octree/octree.c.i
-.PHONY : src/Octree/octree.i
+src/glad/glad.i: src/glad/glad.c.i
+.PHONY : src/glad/glad.i
 
 # target to preprocess a source file
-src/Octree/octree.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxelengine.dir/build.make CMakeFiles/voxelengine.dir/src/Octree/octree.c.i
-.PHONY : src/Octree/octree.c.i
+src/glad/glad.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxelengine.dir/build.make CMakeFiles/voxelengine.dir/src/glad/glad.c.i
+.PHONY : src/glad/glad.c.i
 
-src/Octree/octree.s: src/Octree/octree.c.s
-.PHONY : src/Octree/octree.s
+src/glad/glad.s: src/glad/glad.c.s
+.PHONY : src/glad/glad.s
 
 # target to generate assembly for a file
-src/Octree/octree.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxelengine.dir/build.make CMakeFiles/voxelengine.dir/src/Octree/octree.c.s
-.PHONY : src/Octree/octree.c.s
+src/glad/glad.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxelengine.dir/build.make CMakeFiles/voxelengine.dir/src/glad/glad.c.s
+.PHONY : src/glad/glad.c.s
 
 src/main.o: src/main.c.o
 .PHONY : src/main.o
@@ -594,6 +570,30 @@ src/main.s: src/main.c.s
 src/main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxelengine.dir/build.make CMakeFiles/voxelengine.dir/src/main.c.s
 .PHONY : src/main.c.s
+
+src/octree/octree.o: src/octree/octree.c.o
+.PHONY : src/octree/octree.o
+
+# target to build an object file
+src/octree/octree.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxelengine.dir/build.make CMakeFiles/voxelengine.dir/src/octree/octree.c.o
+.PHONY : src/octree/octree.c.o
+
+src/octree/octree.i: src/octree/octree.c.i
+.PHONY : src/octree/octree.i
+
+# target to preprocess a source file
+src/octree/octree.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxelengine.dir/build.make CMakeFiles/voxelengine.dir/src/octree/octree.c.i
+.PHONY : src/octree/octree.c.i
+
+src/octree/octree.s: src/octree/octree.c.s
+.PHONY : src/octree/octree.s
+
+# target to generate assembly for a file
+src/octree/octree.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/voxelengine.dir/build.make CMakeFiles/voxelengine.dir/src/octree/octree.c.s
+.PHONY : src/octree/octree.c.s
 
 # Help Target
 help:
@@ -635,15 +635,15 @@ help:
 	@echo "... NightlyTest"
 	@echo "... NightlyUpdate"
 	@echo "... voxelengine"
-	@echo "... src/Glad/glad.o"
-	@echo "... src/Glad/glad.i"
-	@echo "... src/Glad/glad.s"
-	@echo "... src/Octree/octree.o"
-	@echo "... src/Octree/octree.i"
-	@echo "... src/Octree/octree.s"
+	@echo "... src/glad/glad.o"
+	@echo "... src/glad/glad.i"
+	@echo "... src/glad/glad.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/octree/octree.o"
+	@echo "... src/octree/octree.i"
+	@echo "... src/octree/octree.s"
 .PHONY : help
 
 

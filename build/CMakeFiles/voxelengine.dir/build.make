@@ -83,46 +83,46 @@ CMakeFiles/voxelengine.dir/src/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/voxelengine.dir/src/main.c.s"
 	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/main.c -o CMakeFiles/voxelengine.dir/src/main.c.s
 
-CMakeFiles/voxelengine.dir/src/Glad/glad.c.o: CMakeFiles/voxelengine.dir/flags.make
-CMakeFiles/voxelengine.dir/src/Glad/glad.c.o: /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/Glad/glad.c
-CMakeFiles/voxelengine.dir/src/Glad/glad.c.o: CMakeFiles/voxelengine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/9E4668B146688BB9/CProjects/voxel-engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/voxelengine.dir/src/Glad/glad.c.o"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/voxelengine.dir/src/Glad/glad.c.o -MF CMakeFiles/voxelengine.dir/src/Glad/glad.c.o.d -o CMakeFiles/voxelengine.dir/src/Glad/glad.c.o -c /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/Glad/glad.c
+CMakeFiles/voxelengine.dir/src/glad/glad.c.o: CMakeFiles/voxelengine.dir/flags.make
+CMakeFiles/voxelengine.dir/src/glad/glad.c.o: /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/glad/glad.c
+CMakeFiles/voxelengine.dir/src/glad/glad.c.o: CMakeFiles/voxelengine.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/9E4668B146688BB9/CProjects/voxel-engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/voxelengine.dir/src/glad/glad.c.o"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/voxelengine.dir/src/glad/glad.c.o -MF CMakeFiles/voxelengine.dir/src/glad/glad.c.o.d -o CMakeFiles/voxelengine.dir/src/glad/glad.c.o -c /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/glad/glad.c
 
-CMakeFiles/voxelengine.dir/src/Glad/glad.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/voxelengine.dir/src/Glad/glad.c.i"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/Glad/glad.c > CMakeFiles/voxelengine.dir/src/Glad/glad.c.i
+CMakeFiles/voxelengine.dir/src/glad/glad.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/voxelengine.dir/src/glad/glad.c.i"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/glad/glad.c > CMakeFiles/voxelengine.dir/src/glad/glad.c.i
 
-CMakeFiles/voxelengine.dir/src/Glad/glad.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/voxelengine.dir/src/Glad/glad.c.s"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/Glad/glad.c -o CMakeFiles/voxelengine.dir/src/Glad/glad.c.s
+CMakeFiles/voxelengine.dir/src/glad/glad.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/voxelengine.dir/src/glad/glad.c.s"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/glad/glad.c -o CMakeFiles/voxelengine.dir/src/glad/glad.c.s
 
-CMakeFiles/voxelengine.dir/src/Octree/octree.c.o: CMakeFiles/voxelengine.dir/flags.make
-CMakeFiles/voxelengine.dir/src/Octree/octree.c.o: /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/Octree/octree.c
-CMakeFiles/voxelengine.dir/src/Octree/octree.c.o: CMakeFiles/voxelengine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/9E4668B146688BB9/CProjects/voxel-engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/voxelengine.dir/src/Octree/octree.c.o"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/voxelengine.dir/src/Octree/octree.c.o -MF CMakeFiles/voxelengine.dir/src/Octree/octree.c.o.d -o CMakeFiles/voxelengine.dir/src/Octree/octree.c.o -c /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/Octree/octree.c
+CMakeFiles/voxelengine.dir/src/octree/octree.c.o: CMakeFiles/voxelengine.dir/flags.make
+CMakeFiles/voxelengine.dir/src/octree/octree.c.o: /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/octree/octree.c
+CMakeFiles/voxelengine.dir/src/octree/octree.c.o: CMakeFiles/voxelengine.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/9E4668B146688BB9/CProjects/voxel-engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/voxelengine.dir/src/octree/octree.c.o"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/voxelengine.dir/src/octree/octree.c.o -MF CMakeFiles/voxelengine.dir/src/octree/octree.c.o.d -o CMakeFiles/voxelengine.dir/src/octree/octree.c.o -c /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/octree/octree.c
 
-CMakeFiles/voxelengine.dir/src/Octree/octree.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/voxelengine.dir/src/Octree/octree.c.i"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/Octree/octree.c > CMakeFiles/voxelengine.dir/src/Octree/octree.c.i
+CMakeFiles/voxelengine.dir/src/octree/octree.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/voxelengine.dir/src/octree/octree.c.i"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/octree/octree.c > CMakeFiles/voxelengine.dir/src/octree/octree.c.i
 
-CMakeFiles/voxelengine.dir/src/Octree/octree.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/voxelengine.dir/src/Octree/octree.c.s"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/Octree/octree.c -o CMakeFiles/voxelengine.dir/src/Octree/octree.c.s
+CMakeFiles/voxelengine.dir/src/octree/octree.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/voxelengine.dir/src/octree/octree.c.s"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/octree/octree.c -o CMakeFiles/voxelengine.dir/src/octree/octree.c.s
 
 # Object files for target voxelengine
 voxelengine_OBJECTS = \
 "CMakeFiles/voxelengine.dir/src/main.c.o" \
-"CMakeFiles/voxelengine.dir/src/Glad/glad.c.o" \
-"CMakeFiles/voxelengine.dir/src/Octree/octree.c.o"
+"CMakeFiles/voxelengine.dir/src/glad/glad.c.o" \
+"CMakeFiles/voxelengine.dir/src/octree/octree.c.o"
 
 # External object files for target voxelengine
 voxelengine_EXTERNAL_OBJECTS =
 
 voxelengine: CMakeFiles/voxelengine.dir/src/main.c.o
-voxelengine: CMakeFiles/voxelengine.dir/src/Glad/glad.c.o
-voxelengine: CMakeFiles/voxelengine.dir/src/Octree/octree.c.o
+voxelengine: CMakeFiles/voxelengine.dir/src/glad/glad.c.o
+voxelengine: CMakeFiles/voxelengine.dir/src/octree/octree.c.o
 voxelengine: CMakeFiles/voxelengine.dir/build.make
 voxelengine: CMakeFiles/voxelengine.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/mnt/9E4668B146688BB9/CProjects/voxel-engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable voxelengine"

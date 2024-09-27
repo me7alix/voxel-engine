@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Site BuildName="Linux-gcc"
-	BuildStamp="20240919-0648-Experimental"
+	BuildStamp="20240922-1537-Experimental"
 	Name="fedora"
 	Generator="ctest-3.27.7"
 	CompilerName=""
@@ -21,14 +21,14 @@
 	TotalVirtualMemory="8191"
 	TotalPhysicalMemory="15796"
 	LogicalProcessorsPerPhysical="2"
-	ProcessorClockFrequency="3069.56"
+	ProcessorClockFrequency="3274.89"
 	>
 	<Testing>
-		<StartDateTime>Sep 19 14:21 MSK</StartDateTime>
-		<StartTestTime>1726744917</StartTestTime>
+		<StartDateTime>Sep 22 18:37 MSK</StartDateTime>
+		<StartTestTime>1727019448</StartTestTime>
 		<TestList/>
-		<EndDateTime>Sep 19 14:21 MSK</EndDateTime>
-		<EndTestTime>1726744917</EndTestTime>
+		<EndDateTime>Sep 22 18:37 MSK</EndDateTime>
+		<EndTestTime>1727019448</EndTestTime>
 		<ElapsedMinutes>0</ElapsedMinutes>
 	</Testing>
 </Site>

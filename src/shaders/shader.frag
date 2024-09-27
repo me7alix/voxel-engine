@@ -64,9 +64,9 @@ bool isPointInParallelepiped(vec3 point, vec3 minBounds, vec3 maxBounds) {
 
 void renderOctree(int rootInd, vec3 pos, vec3 ro, vec3 rd, out vec3 color){
     color = vec3(0.5, 0.5, 1.);
-    int stInd[32];
-    vec3 stPos[32];
-    int stDepth[32];
+    int stInd[128];
+    vec3 stPos[128];
+    int stDepth[128];
     int stpr = 0;
     float minDists[32];
     for(int i = 0; i < 32; i++)
@@ -83,24 +83,25 @@ void renderOctree(int rootInd, vec3 pos, vec3 ro, vec3 rd, out vec3 color){
             if(octarr[rootInd].isColored == 1){
                 vec3 inter = box(ro, rd, pos, pos + size);
                 float c = dot(aabbNormal(pos, pos + size, inter.z * rd + ro), normalize(vec3(-1., -1., -1.)));
-                if(abs(inter.z - minDists[depth]) > 0.001) continue;
+                if(abs(inter.z - minDists[depth]) > 0.0001) continue;
                 color = max(vec3(c), vec3(0.1));
                 color *= abs(pos-vec3(0.0)) / 5.0;
-                return;
+                continue;
                 //if(abs(inter.z - minDists[depth]) <= 0.001) return;
                 //if(inter.z != minDists[depth]) continue;
             }
             continue;
         }
         size /= 2.0;
+        depth++;
         for(int i = 0; i < 8; i++){
             vec3 cpos = pos + (positions[i] * size.x);
             vec3 inter = box(ro, rd, cpos, cpos + size);
-            if(bool(inter.x)){
+            if(inter.x > 0.5){
                 stInd[stpr] = octarr[rootInd].children[i];
                 stPos[stpr] = cpos;
-                stDepth[stpr] = depth + 1;
-                minDists[depth + 1] = min(inter.z, minDists[depth + 1]);
+                stDepth[stpr] = depth;
+                minDists[depth] = min(inter.z, minDists[depth]);
                 stpr++;
             }
         }

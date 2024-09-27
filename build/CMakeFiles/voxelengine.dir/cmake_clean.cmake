@@ -1,10 +1,10 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/voxelengine.dir/src/Glad/glad.c.o"
-  "CMakeFiles/voxelengine.dir/src/Glad/glad.c.o.d"
-  "CMakeFiles/voxelengine.dir/src/Octree/octree.c.o"
-  "CMakeFiles/voxelengine.dir/src/Octree/octree.c.o.d"
+  "CMakeFiles/voxelengine.dir/src/glad/glad.c.o"
+  "CMakeFiles/voxelengine.dir/src/glad/glad.c.o.d"
   "CMakeFiles/voxelengine.dir/src/main.c.o"
   "CMakeFiles/voxelengine.dir/src/main.c.o.d"
+  "CMakeFiles/voxelengine.dir/src/octree/octree.c.o"
+  "CMakeFiles/voxelengine.dir/src/octree/octree.c.o.d"
   "voxelengine"
   "voxelengine.pdb"
 )

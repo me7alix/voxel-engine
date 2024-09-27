@@ -1,6 +1,8 @@
-CMakeFiles/voxelengine.dir/src/main.c.o: \
- /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/main.c \
- /usr/include/stdc-predef.h /usr/include/GLFW/glfw3.h \
+CMakeFiles/voxelengine.dir/src/octree/octree.c.o: \
+ /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/octree/octree.c \
+ /usr/include/stdc-predef.h \
+ /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/octree/octree.h \
+ /usr/include/GLFW/glfw3.h \
  /usr/lib/gcc/x86_64-redhat-linux/13/include/stddef.h \
  /usr/lib/gcc/x86_64-redhat-linux/13/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/libc-header-start.h \
@@ -11,10 +13,8 @@ CMakeFiles/voxelengine.dir/src/main.c.o: \
  /usr/include/bits/types.h /usr/include/bits/typesizes.h \
  /usr/include/bits/time64.h /usr/include/bits/wchar.h \
  /usr/include/bits/stdint-intn.h /usr/include/bits/stdint-uintn.h \
- /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/glad/glad.h \
- /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/glad/khrplatform.h \
- /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/octree/octree.h \
  /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/octree/../glad/glad.h \
+ /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/octree/../glad/khrplatform.h \
  /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/octree/../linmath.h \
  /usr/include/string.h /usr/include/bits/types/locale_t.h \
  /usr/include/bits/types/__locale_t.h /usr/include/strings.h \
@@ -23,17 +23,15 @@ CMakeFiles/voxelengine.dir/src/main.c.o: \
  /usr/include/bits/floatn-common.h /usr/include/bits/flt-eval-method.h \
  /usr/include/bits/fp-logb.h /usr/include/bits/fp-fast.h \
  /usr/include/bits/mathcalls-helper-functions.h \
- /usr/include/bits/mathcalls.h \
- /mnt/9E4668B146688BB9/CProjects/voxel-engine/src/linmath.h \
- /usr/include/stdlib.h /usr/include/bits/waitflags.h \
- /usr/include/bits/waitstatus.h /usr/include/sys/types.h \
- /usr/include/bits/types/clock_t.h /usr/include/bits/types/clockid_t.h \
- /usr/include/bits/types/time_t.h /usr/include/bits/types/timer_t.h \
- /usr/include/endian.h /usr/include/bits/endian.h \
- /usr/include/bits/endianness.h /usr/include/bits/byteswap.h \
- /usr/include/bits/uintn-identity.h /usr/include/sys/select.h \
- /usr/include/bits/select.h /usr/include/bits/types/sigset_t.h \
- /usr/include/bits/types/__sigset_t.h \
+ /usr/include/bits/mathcalls.h /usr/include/stdlib.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/sys/types.h /usr/include/bits/types/clock_t.h \
+ /usr/include/bits/types/clockid_t.h /usr/include/bits/types/time_t.h \
+ /usr/include/bits/types/timer_t.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/endianness.h \
+ /usr/include/bits/byteswap.h /usr/include/bits/uintn-identity.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/types/sigset_t.h /usr/include/bits/types/__sigset_t.h \
  /usr/include/bits/types/struct_timeval.h \
  /usr/include/bits/types/struct_timespec.h \
  /usr/include/bits/pthreadtypes.h /usr/include/bits/thread-shared-types.h \
