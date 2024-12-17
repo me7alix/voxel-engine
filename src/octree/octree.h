@@ -3,8 +3,8 @@
 #include "../glad/glad.h"
 #include "../linmath.h"
 
-#define ARR_SIZE 1000000
-#define DEPTH 9
+#define ARR_SIZE 5000000
+#define DEPTH 10
 
 typedef struct {
     int children[8];

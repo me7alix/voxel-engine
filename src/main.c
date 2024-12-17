@@ -10,8 +10,8 @@
 
 #define PI 3.1415926
 
-const int SCREEN_WIDTH = 1920;
-const int SCREEN_HEIGHT = 1080;
+const int SCREEN_WIDTH = 1920/2;
+const int SCREEN_HEIGHT = 1080/2;
 
 unsigned vao;
 unsigned int shader_program;
@@ -224,14 +224,14 @@ int main(void)
     setup_data();
 
     octarr = octarr_new();
-    Octree root;
+    Octree root; 
     root.isColored = 1;
     root.isIntact = 1;
     vec3 pos = {0, 0, 0};
     vec3 sp = {0, 0, 0};
     octarr_add(octarr, root);
     destroyVoxels(octarr, 0, pos, sp, 2.7, 0);
-    float movingSpeed = 0.03;
+    float movingSpeed = 0.001;
     ssbo = setupSSBO(octarr->arr, shader_program);
     while (!glfwWindowShouldClose(window)){
         glClear(GL_COLOR_BUFFER_BIT);

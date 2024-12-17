@@ -52,7 +52,7 @@ vec3 aabbNormal(const vec3 bmin, const vec3 bmax, const vec3 point) {
     const vec3 center = 0.5 * (bmin + bmax);
     const vec3 centerToPoint = point - center;
     const vec3 halfSize = 0.5 * (bmax - bmin);
-    return normalize(sign(centerToPoint) * step(-0.00125, abs(centerToPoint) - halfSize));
+    return normalize(sign(centerToPoint) * step(-0.00075, abs(centerToPoint) - halfSize));
 }
 
 bool isPointInParallelepiped(vec3 point, vec3 minBounds, vec3 maxBounds) {
@@ -61,9 +61,19 @@ bool isPointInParallelepiped(vec3 point, vec3 minBounds, vec3 maxBounds) {
             point.z >= minBounds.z && point.z <= maxBounds.z);
 }
 
+struct VoxIter{
+    int ind;
+    vec3 pos;
+    int dep;
+    float dist;
+};
 
-void renderOctree(int rootInd, vec3 pos, float depth, vec3 ro, vec3 rd, out vec3 color){
+void renderOctree(vec3 ro, vec3 rd, out vec3 color){
     vec3 oro = ro;
+    int rootInd = 0; 
+    vec3 pos = vec3(0);
+    float depth = 0; 
+    
     float maxHP = 0.0;
     vec3 lastHP = vec3(0);
 
@@ -129,6 +139,6 @@ void main() {
     rd.xz *= -mrot(angles.x);
     vec3 ro = position;
     vec3 color = vec3(1);
-    renderOctree(0, vec3(0), 0.0, ro, rd, color);
+    renderOctree(ro, rd, color);
     fragColor = vec4(color, 1.0);
 }

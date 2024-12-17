@@ -3,12 +3,10 @@
 #include <stdio.h>
 
 
-
 int octarr_add(OctreeArray *octarr, Octree a){
     int index = octarr->aids[octarr->stpr--];
     octarr->arr[index] = a;
     return index;
-
 }
 
 void octarr_remove(OctreeArray *octarr, int index){
