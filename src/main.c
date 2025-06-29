@@ -10,8 +10,8 @@
 
 #define PI 3.1415926
 
-const int SCREEN_WIDTH = 1920/2;
-const int SCREEN_HEIGHT = 1080/2;
+const int SCREEN_WIDTH = 1920;
+const int SCREEN_HEIGHT = 1080;
 
 unsigned vao;
 unsigned int shader_program;
@@ -34,15 +34,18 @@ char* read_file(const char* filename) {
         fprintf(stderr, "Could not open file %s for reading\n", filename);
         return NULL;
     }
+
     fseek(file, 0, SEEK_END);
     long length = ftell(file);
     fseek(file, 0, SEEK_SET);
     char* content = (char*)malloc((length + 1) * sizeof(char));
+
     if (!content) {
         fprintf(stderr, "Could not allocate memory for file contents\n");
         fclose(file);
         return NULL;
     }
+
     fread(content, 1, length, file);
     content[length] = '\0';
     fclose(file);
@@ -174,14 +177,16 @@ GLuint ssbo;
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods){
     vec3 pos = {0, 0, 0};
     vec3 sp = {0, 0, 0};
-    //spherical_to_cartesian(1.0, -p_x + PI/2.0, PI / 2.0, sp);
+
     sp[0] += p_x; sp[1] += p_y; sp[2] += p_z;
     if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS){
         destroyVoxels(octarr, 0, pos, sp, 0.7, 0);
     }
+
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS){
         addVoxels(octarr, 0, pos, sp, 0.4, 0);
     }
+
     glDeleteBuffers(1, &ssbo);
     GLuint ssbo = setupSSBO(octarr->arr, shader_program);
 }
@@ -210,7 +215,7 @@ int main(void)
     glfwSetMouseButtonCallback(window, mouse_button_callback);
 
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    glfwSetCursorPos(window, SCREEN_WIDTH / 2.0, SCREEN_HEIGHT / 2.0);
+    glfwSetCursorPos(window, SCREEN_WIDTH, SCREEN_HEIGHT);
 
     if (glfwRawMouseMotionSupported())
         glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
@@ -231,8 +236,10 @@ int main(void)
     vec3 sp = {0, 0, 0};
     octarr_add(octarr, root);
     destroyVoxels(octarr, 0, pos, sp, 2.7, 0);
-    float movingSpeed = 0.001;
+
+    float movingSpeed = 0.01;
     ssbo = setupSSBO(octarr->arr, shader_program);
+
     while (!glfwWindowShouldClose(window)){
         glClear(GL_COLOR_BUFFER_BIT);
         glUseProgram(shader_program);
@@ -255,21 +262,20 @@ int main(void)
         loc = glGetUniformLocation(shader_program, "angles");
         glUniform2f(loc, a_x, a_y);
 
-		//GLuint ssbo = setupSSBO(octarr->arr, shader_program);
-
-        glfwSetCursorPos(window, SCREEN_WIDTH / 2.0, SCREEN_HEIGHT / 2.0);
-        lastCursorX = SCREEN_WIDTH / 2.0;
-        lastCursorY = SCREEN_HEIGHT / 2.0;
+        glfwSetCursorPos(window, SCREEN_WIDTH, SCREEN_HEIGHT);
+        lastCursorX = SCREEN_WIDTH;
+        lastCursorY = SCREEN_HEIGHT;
 
         glBindVertexArray(vao);
         glDrawArrays(GL_TRIANGLES, 0, 6);
-        //glDeleteBuffers(1, &ssbo);
 
         deltaCursorX = 0; deltaCursorY = 0;
 
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+
     glfwTerminate();
+    glDeleteBuffers(1, &ssbo);
     return 0;
 }
